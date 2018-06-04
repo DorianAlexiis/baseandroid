@@ -27,7 +27,7 @@ open class BaseActivity : AppCompatActivity() {
         pushFragment(fragment, addBackStack = false)
     }
 
-    fun pushFragment(fragment: Fragment, container: Int = R.id.container, addBackStack: Boolean = true,
+    @JvmOverloads fun pushFragment(fragment: Fragment, container: Int = R.id.container, addBackStack: Boolean = true,
                      vararg animations: Int = intArrayOf()) {
         val transaction = supportFragmentManager.beginTransaction()
         val tag = fragment.tag

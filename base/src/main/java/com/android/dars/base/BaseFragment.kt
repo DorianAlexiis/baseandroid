@@ -24,12 +24,12 @@ open class BaseFragment: Fragment(){
         return mView
     }
 
-    protected fun pushFragment(fragment: Fragment, container: Int= R.id.container,
+    @JvmOverloads protected fun pushFragment(fragment: Fragment, container: Int= R.id.container,
                                addBackStack: Boolean = true) {
         activity?.pushFragment(fragment, container, addBackStack)
     }
 
-    fun replaceFragment(fragment: Fragment, container: Int = R.id.container) {
+    @JvmOverloads fun replaceFragment(fragment: Fragment, container: Int = R.id.container) {
         activity?.pushFragment(fragment,container = container, addBackStack =  false)
     }
 
