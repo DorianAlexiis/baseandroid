@@ -1,11 +1,10 @@
-package com.kitsu.android.anime.ui.base
+package com.android.dars.base
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.android.dars.base.R
 
 open class BaseFragment: Fragment(){
 

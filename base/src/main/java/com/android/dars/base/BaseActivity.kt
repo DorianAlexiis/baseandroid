@@ -1,11 +1,9 @@
-package com.kitsu.android.anime.ui.base
+package com.android.dars.base
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.android.dars.base.BuildConfig
-import com.android.dars.base.R
 import java.util.*
 
 open class BaseActivity : AppCompatActivity() {
