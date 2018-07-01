@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 import java.util.*
 
 open class BaseActivity : AppCompatActivity() {
@@ -21,17 +20,10 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
-                .setDefaultFontPath(getTypeDefault())
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        )
         mTagFragments = ArrayList<String>()
         setContentView(getActivityLayoutResId())
         onViewCreated(savedInstanceState)
     }
-
-    private fun getTypeDefault(): String = "fonts/roboto-light.ttf"
 
     open fun onViewCreated(savedInstanceState: Bundle?) {
 

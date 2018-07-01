@@ -2,7 +2,6 @@
 <resources>
 
     <style name="ToolbarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="fontPath">fonts/roboto-light.ttf</item>
         <item name="colorControlNormal">@android:color/white</item>
     </style>
 
