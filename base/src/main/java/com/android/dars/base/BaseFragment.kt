@@ -1,19 +1,31 @@
 package com.android.dars.base
 
 import android.os.Bundle
+import android.support.annotation.IdRes
+import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
+import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 open class BaseFragment: Fragment(){
 
+    open val TRANSACTION_WITHOUT_ANIMATION = 0
+    private val HAVE_TOOLBAR = "haveToolbar"
+
     private var activity: BaseActivity? = null
+    protected var haveToolbar:Boolean = false
+    private var tvTitle: TextView? = null
+    private var mToolbar: Toolbar? = null
     protected var mView: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity = getActivity() as BaseActivity
+        haveToolbar = savedInstanceState != null && savedInstanceState.getBoolean(HAVE_TOOLBAR)
     }
 
     open fun getFragmentLayoutResId(): Int = R.layout.fragment_base
@@ -21,8 +33,114 @@ open class BaseFragment: Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         mView = inflater.inflate(getFragmentLayoutResId(), container, false)
+        if(haveToolbar){
+            onCreateToolbar(mView,R.id.toolbar, null)
+        }
         return mView
     }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(HAVE_TOOLBAR, haveToolbar)
+    }
+
+    open fun onCreateToolbar(view: View?, @IdRes idToolbar: Int?, toolbar: Toolbar?) : Toolbar? {
+        if(view == null){
+            return null
+        }
+        if (toolbar == null) {
+            try {
+                val id = idToolbar.let { R.id.toolbar }
+                mToolbar = view.findViewById<View>(id) as Toolbar
+                tvTitle = view.findViewById<View>(R.id.tvTitle) as TextView
+                mToolbar?.post {
+                    setToolBar(mToolbar)
+                    activity?.hideToolbar()
+                    haveToolbar = true
+                }
+            } catch (e: Exception) {
+                Log.e(tag , "")
+                haveToolbar = false
+            }
+        } else {
+            mToolbar = toolbar
+            haveToolbar = true
+        }
+        if (haveToolbar){
+            setEnableBackToolbar(true)
+        }
+        return mToolbar
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        if (haveToolbar){
+            activity?.hideToolbar()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (haveToolbar && !haveToolbarLastFragment()) {
+            activity?.showToolbar()
+        }
+    }
+
+    private fun haveToolbarLastFragment(): Boolean {
+        val tag = getLastTagFragment()
+        tag?.let {
+            val baseFragment = activity?.findFragmentByTag(it)
+            return !tag.isEmpty() && baseFragment?.haveToolbar ?: false
+        }
+        return false
+    }
+
+    open fun getLastTagFragment(): String? {
+        return activity?.getLastTagFragment()
+    }
+
+    open fun setToolBar(toolBar: Toolbar?) {
+        val baseActivity = getActivity() as BaseActivity?
+        if (baseActivity != null) {
+            mToolbar = toolBar
+            haveToolbar = true
+            (getActivity() as BaseActivity).setSupportActionBar(toolBar)
+        }
+    }
+
+    open fun setEnableBackToolbar(enable: Boolean) {
+        activity?.let {
+            it.supportActionBar?.let {
+                it.setDisplayHomeAsUpEnabled(enable)
+                it.setDisplayShowHomeEnabled(enable)
+                it.title = ""
+                it.subtitle = ""
+            }
+        }
+    }
+
+    protected fun setTitle(@StringRes resId: Int) {
+        setTitle(context?.getString(resId))
+    }
+
+    protected fun setTitle(title: String?) {
+        if(haveToolbar){
+            mToolbar?.post {
+                mToolbar?.title = ""
+                mToolbar?.subtitle = ""
+                tvTitle?.let {
+                    it.text = title
+                }
+            }
+        }else{
+            title?.let {
+                activity?.setTitle(it)
+            }
+        }
+    }
+
 
     @JvmOverloads protected fun pushFragment(fragment: Fragment, container: Int= R.id.container,
                                addBackStack: Boolean = true) {
