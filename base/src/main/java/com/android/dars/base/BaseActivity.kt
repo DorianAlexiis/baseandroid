@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import butterknife.ButterKnife
 import dmax.dialog.SpotsDialog
 import java.util.*
 
@@ -33,6 +34,7 @@ open class BaseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mTagFragments = ArrayList<String>()
         setContentView(getActivityLayoutResId())
+        ButterKnife.bind(this)
         onViewCreated(savedInstanceState)
     }
 

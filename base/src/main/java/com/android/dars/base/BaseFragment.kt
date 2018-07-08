@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import butterknife.ButterKnife
 
 open class BaseFragment: Fragment(){
 
@@ -35,6 +36,7 @@ open class BaseFragment: Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         mView = inflater.inflate(getFragmentLayoutResId(), container, false)
+        ButterKnife.bind(this, mView!!)
         if(haveToolbar){
             onCreateToolbar(mView,R.id.toolbar, null)
         }
