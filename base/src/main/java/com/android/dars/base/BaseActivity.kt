@@ -2,6 +2,7 @@ package com.android.dars.base
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -130,12 +131,26 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    fun replaceFragment(fragment: Fragment) {
+    open fun setupImageToolbar(@DrawableRes resImage: Int, enable: Boolean) {
+        supportActionBar?.let {
+            it.setHomeAsUpIndicator(resImage)
+            it.setDisplayHomeAsUpEnabled(enable)
+        }
+    }
+
+    open fun setEnableBackToolbar(enable: Boolean) {
+        supportActionBar?.let {
+            it.setDisplayHomeAsUpEnabled(enable)
+            it.setDisplayShowHomeEnabled(enable)
+        }
+    }
+
+    open fun replaceFragment(fragment: Fragment) {
         pushFragment(fragment, addBackStack = false)
     }
 
     @JvmOverloads
-    fun pushFragment(fragment: Fragment, container: Int = R.id.container, addBackStack: Boolean = true,
+    open fun pushFragment(fragment: Fragment, container: Int = R.id.container, addBackStack: Boolean = true,
                      vararg animations: Int = intArrayOf()) {
         val transaction = supportFragmentManager.beginTransaction()
         val tag = fragment.javaClass.simpleName

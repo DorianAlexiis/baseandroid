@@ -1,6 +1,8 @@
 package com.android.dars.base
 
+import android.content.Context
 import android.os.Bundle
+import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
@@ -39,6 +41,15 @@ open class BaseFragment: Fragment(){
         return mView
     }
 
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        initialize()
+    }
+
+    open fun initialize(){
+
+    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -87,6 +98,15 @@ open class BaseFragment: Fragment(){
             activity?.showToolbar()
         }
     }
+
+    open fun setupImageToolbar(@DrawableRes resImage: Int, enable: Boolean) {
+        activity?.setupImageToolbar(resImage, enable)
+    }
+
+    open fun setupTitleToolbar(title: String) {
+        activity?.setTitle(title)
+    }
+
 
     private fun haveToolbarLastFragment(): Boolean {
         val tag = getLastTagFragment()
