@@ -25,6 +25,7 @@ class OnBordingFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTitle( "hola" )
+        showProgressDialog()
     }
 
 }

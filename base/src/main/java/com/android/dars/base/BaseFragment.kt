@@ -121,6 +121,15 @@ open class BaseFragment: Fragment(){
         }
     }
 
+
+    open fun onBackToolbar(): Boolean {
+        return false
+    }
+
+    open fun onBackPressed(): Boolean {
+        return false
+    }
+
     protected fun setTitle(@StringRes resId: Int) {
         setTitle(context?.getString(resId))
     }
@@ -141,6 +150,22 @@ open class BaseFragment: Fragment(){
         }
     }
 
+    fun showProgressDialog() {
+        activity?.showProgressDialog()
+    }
+
+    fun dismissDialog() {
+        activity?.dismissProgressDialog()
+    }
+
+
+    open fun goBack(number: Int) {
+        activity?.goBack(number)
+    }
+
+    open fun goBack() {
+        activity?.goBack()
+    }
 
     @JvmOverloads protected fun pushFragment(fragment: Fragment, container: Int= R.id.container,
                                addBackStack: Boolean = true) {

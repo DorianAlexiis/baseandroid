@@ -1,12 +1,15 @@
 package com.android.dars.base
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import dmax.dialog.SpotsDialog
 import java.util.*
 
 open class BaseActivity : AppCompatActivity() {
@@ -16,9 +19,16 @@ open class BaseActivity : AppCompatActivity() {
     private var mToolbar: Toolbar? = null
     private var tvTitle: TextView? = null
 
+    private var progressDialog: SpotsDialog? = null
+
     open fun getActivityLayoutResId(): Int = R.layout.activity_base
 
+    open fun initialize() {
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        initialize()
         super.onCreate(savedInstanceState)
         mTagFragments = ArrayList<String>()
         setContentView(getActivityLayoutResId())
@@ -30,7 +40,11 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun findFragmentByTag(tag: String): BaseFragment? {
-        return fragmentManager?.findFragmentByTag(tag) as BaseFragment
+        val fragment = fragmentManager?.findFragmentByTag(tag)
+        if(fragment != null){
+            return fragment as BaseFragment
+        }
+        return null
     }
 
     fun getLastTagFragment(): String {
@@ -73,6 +87,48 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val fragment = fragmentManager.findFragmentByTag(getLastTagFragment())
+        if (fragment != null && fragment is BaseFragment) {
+            val base = fragment as BaseFragment
+            base.onActivityResult(requestCode, resultCode, data)
+        }
+    }
+
+    override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
+        if (menuItem.itemId == android.R.id.home) {
+            if (mTagFragments.size > 1) {
+                val fragment = fragmentManager.findFragmentByTag(mTagFragments[mTagFragments.size - 1])
+                if (fragment is BaseFragment) {
+                    val base = fragment as BaseFragment
+                    if (base.onBackToolbar()) {
+                        return true
+                    }
+                }
+                goBack()
+            } else {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(menuItem)
+    }
+
+    override fun onBackPressed() {
+        if (mTagFragments.size > 1) {
+            val fragment = fragmentManager.findFragmentByTag(mTagFragments[mTagFragments.size - 1])
+            if (fragment is BaseFragment) {
+                val base = fragment as BaseFragment
+                if (base.onBackPressed()) {
+                    return
+                }
+            }
+            mTagFragments.removeAt(mTagFragments.size - 1)
+            super.onBackPressed()
+        } else {
+            finish()
+        }
+    }
 
     fun replaceFragment(fragment: Fragment) {
         pushFragment(fragment, addBackStack = false)
@@ -117,4 +173,36 @@ open class BaseActivity : AppCompatActivity() {
             }
         }
     }
+
+    open fun goBack(number: Int) {
+        if (number < 1) {
+            Log.w("Base", "Invalid number back")
+            return
+        }
+        for (i in 0 until number) {
+            goBack()
+        }
+    }
+
+    open fun goBack() {
+        if (mTagFragments.size > 0) {
+            mTagFragments.removeAt(mTagFragments.size - 1)
+            fragmentManager.popBackStackImmediate()
+        }
+    }
+
+    open fun showProgressDialog() {
+        progressDialog.let {
+            progressDialog = SpotsDialog(this, getString(R.string.loading))
+            progressDialog?.show()
+        }
+    }
+
+    open fun dismissProgressDialog() {
+        progressDialog?.let {
+            it.dismiss()
+            progressDialog = null
+        }
+    }
+
 }
