@@ -3,6 +3,7 @@ package com.android.dars.base
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.DrawableRes
+import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -145,6 +146,11 @@ open class BaseActivity : AppCompatActivity() {
             it.setDisplayHomeAsUpEnabled(enable)
             it.setDisplayShowHomeEnabled(enable)
         }
+    }
+
+    open fun pushFragment(dialog: DialogFragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        dialog.show(transaction, dialog.javaClass.simpleName)
     }
 
     open fun replaceFragment(fragment: Fragment) {

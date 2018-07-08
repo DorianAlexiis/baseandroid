@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.annotation.DrawableRes
 import android.support.annotation.IdRes
 import android.support.annotation.StringRes
+import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import android.util.Log
@@ -187,6 +188,10 @@ open class BaseFragment: Fragment(){
 
     open fun goBack() {
         activity?.goBack()
+    }
+
+    open fun pushFragment(fragment: DialogFragment) {
+        fragment.show(fragmentManager, fragment.javaClass.simpleName)
     }
 
     @JvmOverloads protected fun pushFragment(fragment: Fragment, container: Int= R.id.container,
