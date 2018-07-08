@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 27
@@ -25,6 +26,7 @@ android {
 
 ext {
     daggerVersion = '2.11'
+    fabricVersion = '2.6.8'
 }
 
 dependencies {
@@ -38,11 +40,15 @@ dependencies {
 
     implementation 'com.github.d-max:spots-dialog:0.7@aar'
 
-
     implementation "com.google.dagger:dagger:$daggerVersion"
     implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    //Fabric
+    implementation("com.crashlytics.sdk.android:crashlytics:$fabricVersion@aar") {
+        transitive = true;
+    }
 }
 repositories {
     mavenCentral()
