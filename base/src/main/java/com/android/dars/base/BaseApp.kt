@@ -9,11 +9,15 @@ open class BaseApp : Application(){
 
     override fun onCreate() {
         super.onCreate()
-        setUseFabric()
+        initFabric(isFabricEnable())
     }
 
-    open fun setUseFabric(enable:Boolean = false){
+    private fun initFabric(enable:Boolean) {
         Fabric.with(this, Crashlytics.Builder().core(CrashlyticsCore.Builder()
                 .disabled(!enable).build()).build(), Crashlytics())
+    }
+
+    open fun isFabricEnable(): Boolean {
+        return true
     }
 }
