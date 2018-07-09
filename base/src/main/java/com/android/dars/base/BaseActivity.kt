@@ -44,7 +44,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     fun findFragmentByTag(tag: String): BaseFragment? {
-        val fragment = fragmentManager?.findFragmentByTag(tag)
+        val fragment = supportFragmentManager?.findFragmentByTag(tag)
         if(fragment != null){
             return fragment as BaseFragment
         }
@@ -93,7 +93,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
-        val fragment = fragmentManager.findFragmentByTag(getLastTagFragment())
+        val fragment = supportFragmentManager.findFragmentByTag(getLastTagFragment())
         if (fragment != null && fragment is BaseFragment) {
             val base = fragment as BaseFragment
             base.onActivityResult(requestCode, resultCode, data)
@@ -103,7 +103,7 @@ open class BaseActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(menuItem: MenuItem): Boolean {
         if (menuItem.itemId == android.R.id.home) {
             if (mTagFragments.size > 1) {
-                val fragment = fragmentManager.findFragmentByTag(mTagFragments[mTagFragments.size - 1])
+                val fragment = supportFragmentManager.findFragmentByTag(mTagFragments[mTagFragments.size - 1])
                 if (fragment is BaseFragment) {
                     val base = fragment as BaseFragment
                     if (base.onBackToolbar()) {
@@ -120,7 +120,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (mTagFragments.size > 1) {
-            val fragment = fragmentManager.findFragmentByTag(mTagFragments[mTagFragments.size - 1])
+            val fragment = supportFragmentManager.findFragmentByTag(mTagFragments[mTagFragments.size - 1])
             if (fragment is BaseFragment) {
                 val base = fragment as BaseFragment
                 if (base.onBackPressed()) {
@@ -210,7 +210,7 @@ open class BaseActivity : AppCompatActivity() {
     open fun goBack() {
         if (mTagFragments.size > 0) {
             mTagFragments.removeAt(mTagFragments.size - 1)
-            fragmentManager.popBackStackImmediate()
+            supportFragmentManager.popBackStackImmediate()
         }
     }
 
