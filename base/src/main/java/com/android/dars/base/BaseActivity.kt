@@ -163,9 +163,9 @@ open class BaseActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         val tag = fragment.javaClass.simpleName
         if (BuildConfig.DEBUG) {
-            Log.d("FLOW", "Activity: ${javaClass.simpleName} -> Fragment:  ${tag}")
+            Log.d("FLOW", "Activity: ${javaClass.simpleName} -> Fragment:  $tag")
         }
-        if (addBackStack && (fragmentManager.backStackEntryCount > 0)) {
+        if (addBackStack && (mTagFragments.size > 0)) {
             transaction.addToBackStack(tag)
         }
         when (animations.size) {

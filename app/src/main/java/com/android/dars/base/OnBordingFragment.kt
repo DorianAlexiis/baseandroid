@@ -2,6 +2,7 @@ package com.android.dars.base
 
 import android.os.Bundle
 import android.view.View
+import kotlinx.android.synthetic.main.fragment_on_bording.*
 
 
 class OnBordingFragment : BaseFragment() {
@@ -26,6 +27,10 @@ class OnBordingFragment : BaseFragment() {
 
         setTitle( "hola" )
         showProgressDialog()
+
+        textview.setOnClickListener{
+            pushFragment(BlankFragment.newInstance("",""))
+        }
     }
 
 }
