@@ -2,11 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'io.fabric'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 27
-
-
 
     defaultConfig {
         minSdkVersion 19
@@ -26,8 +25,8 @@ android {
 
 ext {
     butterKnifeVersion = '8.8.1'
-    daggerVersion = '2.11'
     fabricVersion = '2.6.8'
+    daggerVersion = '2.12'
 }
 
 dependencies {
@@ -58,6 +57,12 @@ dependencies {
 
     //Permission
     implementation 'com.tbruyelle.rxpermissions:rxpermissions:0.9.4@aar'
+
+    // Injection
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
 }
 repositories {
     mavenCentral()

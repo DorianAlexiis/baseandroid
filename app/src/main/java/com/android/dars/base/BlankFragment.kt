@@ -1,9 +1,11 @@
 package com.android.dars.base
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import com.android.dars.base.utils.KeyBoardUtils
 import kotlinx.android.synthetic.main.fragment_blank.*
 
 
@@ -25,10 +27,7 @@ class BlankFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
 
@@ -44,15 +43,6 @@ class BlankFragment : BaseFragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment BlankFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
                 BlankFragment().apply {
@@ -61,5 +51,12 @@ class BlankFragment : BaseFragment() {
                         putString(ARG_PARAM2, param2)
                     }
                 }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (edittext != null) {
+            KeyBoardUtils.hideKeyboardWithDelay(activity as Activity, edittext)
+        }
     }
 }
