@@ -6,7 +6,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
 import javax.inject.Inject
 
-class BaseInjectApp : BaseApp(), HasActivityInjector{
+open class BaseInjectApp : BaseApp(), HasActivityInjector{
     @Inject
     @JvmField
     var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>? = null

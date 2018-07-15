@@ -7,7 +7,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class BaseInjectActivity : BaseActivity(), HasSupportFragmentInjector {
+open class BaseInjectActivity : BaseActivity(), HasSupportFragmentInjector {
 
     @Inject
     @JvmField
