@@ -25,7 +25,6 @@ class OnBordingFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setTitle( "hola" )
         showProgressDialog()
 
         textview.setOnClickListener{
