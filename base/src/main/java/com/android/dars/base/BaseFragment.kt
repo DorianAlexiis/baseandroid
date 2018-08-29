@@ -68,7 +68,7 @@ open class BaseFragment: Fragment(){
                 val id = idToolbar.let { R.id.toolbar }
                 mToolbar = view.findViewById<View>(id) as Toolbar
                 tvTitle = view.findViewById<View>(R.id.tvTitle) as TextView
-                mToolbar?.post {
+                if(mToolbar != null){
                     setToolBar(mToolbar)
                     activity?.hideToolbar()
                     haveToolbar = true
@@ -109,13 +109,23 @@ open class BaseFragment: Fragment(){
     }
 
     open fun setupImageToolbar(@DrawableRes resImage: Int, enable: Boolean) {
-        activity?.setupImageToolbar(resImage, enable)
+            activity?.let {
+                if(haveToolbar){
+                    if(it.actionBar != null){
+                        Log.d("Dars","no es null en actionBar")
+                    }
+                    if(it.supportActionBar != null){
+                        Log.d("Dars","no es null en supportActionBar")
+                    }
+                    it.supportActionBar?.let {
+                        it.setHomeAsUpIndicator(resImage)
+                        it.setDisplayHomeAsUpEnabled(enable)
+                    }
+                }else{
+                    activity?.setupImageToolbar(resImage, enable)
+                }
+            }
     }
-
-    open fun setupTitleToolbar(title: String) {
-        activity?.setTitle(title)
-    }
-
 
     private fun haveToolbarLastFragment(): Boolean {
         val tag = getLastTagFragment()

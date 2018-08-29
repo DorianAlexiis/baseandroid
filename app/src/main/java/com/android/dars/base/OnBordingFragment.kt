@@ -2,6 +2,7 @@ package com.android.dars.base
 
 import android.os.Bundle
 import android.view.View
+import com.android.dars.base.modules.BlankFragment
 import kotlinx.android.synthetic.main.fragment_on_bording.*
 
 
@@ -24,8 +25,8 @@ class OnBordingFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        showProgressDialog()
+        setTitle(R.string.main_toolbarctivity)
+        setupImageToolbar(R.mipmap.ic_launcher_round, true)
 
         textview.setOnClickListener{
             pushFragment(BlankFragment.newInstance("",""))

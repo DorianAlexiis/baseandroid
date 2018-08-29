@@ -1,10 +1,12 @@
-package com.android.dars.base
+package com.android.dars.base.modules
 
 
 import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import com.android.dars.base.BaseFragment
+import com.android.dars.base.R
 import com.android.dars.base.utils.KeyBoardUtils
 import kotlinx.android.synthetic.main.fragment_blank.*
 

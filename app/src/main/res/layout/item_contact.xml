@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_5sm">
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="@dimen/spacing_xxxs">
+        <ImageView
+            android:id="@+id/ivPicture"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/placeholder_contact"/>
+
+        <TextView
+            android:id="@+id/tvWithoutPicture"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            tools:text="D"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_xlg" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Dorian Rios"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/spacing_5sm"
+        android:layout_marginRight="@dimen/spacing_5sm"/>
+
+</LinearLayout>

@@ -2,7 +2,7 @@ package com.android.dars.base
 
 import android.content.Intent
 import android.os.Bundle
-
+import com.android.dars.base.modules.menu.MainActivity
 
 
 class SplashActivity : BaseActivity() {

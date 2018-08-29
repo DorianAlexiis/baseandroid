@@ -3,5 +3,15 @@
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="main.contacts">Contacts</string>
+    <string name="main.contact_name">%1$s %2$s</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_toolbarctivity">Toolbar Activity</string>
+    <string name="title_activity_toolbar">ToolbarActivity</string>
+
+    <string name="detail.empty">Sin Telefonos</string>
+
+    <string name="main.error_contact">Ha ocurrido un error al intentar obtener los contactos.\nToque la imagen para volver a reintentar.</string>
 </resources>
