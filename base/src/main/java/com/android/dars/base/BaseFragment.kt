@@ -72,11 +72,13 @@ open class BaseFragment: Fragment(){
                     setToolBar(mToolbar)
                     activity?.hideToolbar()
                     haveToolbar = true
-                }
-                context?.let {
-                    val checkExistence = it.resources.getIdentifier("app_name", "string", it.packageName)
-                    if(checkExistence!= 0){
-                        setTitle(checkExistence)
+
+                    if(context != null){
+                        val checkExistence = context!!.resources.getIdentifier("app_name", "string",
+                                context!!.packageName)
+                        if(checkExistence!= 0){
+                            setTitle(checkExistence)
+                        }
                     }
                 }
             } catch (e: Exception) {
