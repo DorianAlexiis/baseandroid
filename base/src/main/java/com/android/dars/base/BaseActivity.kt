@@ -91,7 +91,7 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         val fragment = supportFragmentManager.findFragmentByTag(getLastTagFragment())
         if (fragment != null && fragment is BaseFragment) {
