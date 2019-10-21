@@ -1,6 +1,8 @@
 package com.android.dars.base
 
-class App : BaseApp(){
+import android.app.Application
+
+class App : Application(){
 
     override fun onCreate() {
         super.onCreate()

@@ -7,6 +7,8 @@ import com.android.dars.base.modules.menu.MainActivity
 
 class SplashActivity : BaseActivity() {
 
+    override fun getActivityLayoutResId(): Int  = R.layout.activity_base
+
 
     override fun onViewCreated(savedInstanceState: Bundle?) {
         super.onViewCreated(savedInstanceState)
