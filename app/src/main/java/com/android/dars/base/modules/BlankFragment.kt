@@ -3,7 +3,7 @@ package com.android.dars.base.modules
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.View
 import com.android.dars.base.BaseFragment
 import com.android.dars.base.R
