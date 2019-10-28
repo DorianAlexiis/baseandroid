@@ -2,12 +2,12 @@ package com.android.dars.base
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.DrawableRes
-import android.support.annotation.IdRes
-import android.support.annotation.StringRes
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v7.widget.Toolbar
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -213,7 +213,7 @@ open class BaseFragment: Fragment(){
     }
 
     @JvmOverloads protected fun pushFragment(fragment: Fragment, container: Int= R.id.container,
-                               addBackStack: Boolean = true) {
+                                             addBackStack: Boolean = true) {
         activity?.pushFragment(fragment, container, addBackStack)
     }
 

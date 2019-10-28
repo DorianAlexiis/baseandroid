@@ -2,11 +2,11 @@ package com.android.dars.base
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.annotation.DrawableRes
-import android.support.v4.app.DialogFragment
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.annotation.DrawableRes
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -159,7 +159,7 @@ open class BaseActivity : AppCompatActivity() {
 
     @JvmOverloads
     open fun pushFragment(fragment: Fragment, container: Int = R.id.container, addBackStack: Boolean = true,
-                     vararg animations: Int = intArrayOf()) {
+                          vararg animations: Int = intArrayOf()) {
         val transaction = supportFragmentManager.beginTransaction()
         val tag = fragment.javaClass.simpleName
         if (BuildConfig.DEBUG) {

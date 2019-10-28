@@ -1,7 +1,7 @@
 package com.android.dars.base.utils;
 
 
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 import com.android.dars.base.R;
 
